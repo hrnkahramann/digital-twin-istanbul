@@ -8,7 +8,7 @@ class Node:
 
         self.state = {}
         self.history = {
-            "traffic_density": [],
+             [],
         }
 
     def update_state(self, key, value):
