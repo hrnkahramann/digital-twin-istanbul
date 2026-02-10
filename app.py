@@ -185,7 +185,7 @@ if st.session_state.running:
             heat_data.append([node.latitude, node.longitude, val])
 
         HeatMap(heat_data, radius=30, blur=18).add_to(m)
-        map_data = st_folium(m, height=900,width=800, returned_objects=["last_object_clicked"])
+        map_data = st_folium(m, height=520, returned_objects=["last_object_clicked"])
 else:
     with left:
         st.info("🚫 Sistem kapalı")
