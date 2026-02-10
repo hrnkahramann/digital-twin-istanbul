@@ -16,6 +16,8 @@ Farklı senaryolar (sıcak hava, nemli ortam, düşük batarya) altında sistem 
 
 Verileri harita ve grafikler ile görselleştirmek
 
+
+
 ⚙️ Kullanılan Teknolojiler
 
 Python
