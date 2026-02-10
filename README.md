@@ -99,10 +99,6 @@ OPENWEATHER_API_KEY=API_KEYİNİZ
 streamlit run app.py
 
 
-Tarayıcıda otomatik olarak açılır:
-
-http://localhost:8501
-
 📊 Özellikler
 
 Harita üzerinde sensör düğümleri
