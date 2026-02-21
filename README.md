@@ -75,7 +75,6 @@ Sidebar üzerinden aşağıdaki senaryolardan biri seçilebilir:
 
 Bağımlılıkları yüklemek için:
 
-```bash
 pip install streamlit folium streamlit-folium pandas numpy
 
 ---
