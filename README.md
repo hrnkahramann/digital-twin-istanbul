@@ -83,21 +83,8 @@ pip install streamlit folium streamlit-folium pandas numpy
 
 streamlit run app.py
 
-Uygulama varsayılan olarak şu adreste açılır:
-
-http://localhost:8501
-
-
 ---
 
-### 📁 Proje Yapısı
-
-├── app.py
-├── simulation.py
-├── weather.py
-├── data/
-│   └── sensor_log.csv
-└── README.md
 
 ### 📌 Notlar
 
