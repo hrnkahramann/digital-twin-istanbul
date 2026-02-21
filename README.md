@@ -88,6 +88,9 @@ Uygulama varsayılan olarak şu adreste açılır:
 
 http://localhost:8501
 
+
+---
+
 ### 📁 Proje Yapısı
 
 ├── app.py
