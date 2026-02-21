@@ -1,126 +1,106 @@
-Digital Twin – Istanbul IoT Simulation
+# 🌍 Digital Twin – Istanbul IoT Simulation
 
-Bu proje, İstanbul konumları üzerinde sanal IoT sensör düğümleri oluşturarak çevresel verilerin (sıcaklık, nem ve batarya durumu) simülasyonunu yapan bir Digital Twin uygulamasıdır.
-Uygulama, gerçek hava durumu verilerini kullanır ve bu verileri rastgelelik ve senaryo etkileri ile simüle eder.
-Sonuçlar harita üzerinde görselleştirilir ve zaman içinde değişimleri grafiklerle izlenebilir.
+Gerçek zamanlı IoT sensör verilerini simüle eden ve farklı çevresel senaryolar altında karşılaştırmalı analiz yapılmasını sağlayan bir **Digital Twin** uygulamasıdır.
 
-📌 Projenin Amacı
+---
 
-İstanbul üzerinde sanal sensör düğümleri üretmek
+## 🔧 Kullanım
 
-Gerçek hava durumu verilerini kullanarak sıcaklık ve nem simülasyonu yapmak
+### 1️⃣ Sistemi Başlat
 
-Batarya tüketimi ve güneş enerjisi şarjını modellemek
+- Sidebar’dan **▶ Sistemi Başlat** butonuna basın.
+- İstanbul üzerinde rastgele konumlarda sensör node’ları oluşturulur.
+- İlk veri snapshot’ı alınır.
 
-Farklı senaryolar (sıcak hava, nemli ortam, düşük batarya) altında sistem davranışını gözlemlemek
+---
 
-Verileri harita ve grafikler ile görselleştirmek
+### 2️⃣ Senaryo Seçimi
 
+Sidebar üzerinden aşağıdaki senaryolardan biri seçilebilir:
 
+- **Normal** → Referans (baz) veri
+- **Sıcak Hava** → Sıcaklık artar, nem azalır
+- **Nemli Ortam** → Nem artar
+- **Düşük Batarya** → Batarya tüketimi hızlanır
 
-⚙️ Kullanılan Teknolojiler
+---
 
-Python
+### 3️⃣ Veri Güncelleme
 
-Streamlit
+- **🔄 Tek Güncelle** butonuna basarak tüm node’ları güncelleyebilirsiniz.
+- Her güncellemede:
+  - Sensör değerleri değişir
+  - Delta (± fark) hesaplanır
+  - Veriler CSV dosyasına kaydedilir
 
-Folium (harita)
+---
 
-OpenWeather API
+## 📊 Arayüz Davranışı
 
-Pandas
+### 🟢 Normal Senaryo Seçiliyse
 
-NumPy
+- Sağ panelde yalnızca Normal veriler gösterilir.
+- Güncel değerler ve delta farkları görünür.
+- Zaman serisi grafikleri gösterilir.
 
-📂 Proje Yapısı
-digital-twin-istanbul/
-│
-├── app.py              → Streamlit arayüzü
-├── simulation.py       → Sensör ve batarya simülasyonu
-├── weather.py          → Hava durumu API bağlantısı
-├── config.py           → Ortam değişkenleri ve sabitler
-├── requirements.txt    → Gerekli kütüphaneler
-├── data/
-│   └── sensor_log.csv  → Üretilen verilerin kaydı
-└── digitalTwin/
-    ├── network.py
-    ├── node.py
-    └── simulator.py
+---
 
-🧪 Simüle Edilen Veriler
+### 🟡 Normal Dışında Bir Senaryo Seçiliyse
 
-Her sensör düğümü için:
+- İki sütun halinde görüntülenir:
+  - Sol → Normal değerler
+  - Sağ → Seçili senaryo değerleri
+- Her iki sütunda da delta (± fark) gösterilir.
+- En altta Normal ile seçili senaryonun karşılaştırma grafiği bulunur.
 
-Sıcaklık (°C)
+---
 
-Nem (%)
+### 📌 Gösterilecek Veri Seçimi
 
-Batarya seviyesi (%)
+- **ALL** → Tüm metrikler (temperature, humidity, battery)
+- **Temperature / Humidity / Battery** → Sadece seçilen metrik
+- Tüm node görünümünde sütun grafik kullanılır.
+- Tek node seçiliyse zaman serisi grafiği korunur.
 
-Batarya, güneş enerjisi üretimi ve tüketim modeline göre azalır veya artar.
+---
 
-🌦 Senaryolar
+## 🧩 Gereksinimler
 
-Uygulama içinde şu senaryolar bulunur:
+- Python 3.9+
+- Streamlit
+- Folium
+- streamlit-folium
+- Pandas
+- NumPy
 
-Normal
+Bağımlılıkları yüklemek için:
 
-Sıcak Hava → Sıcaklık artar, nem azalır, batarya daha hızlı düşer
+```bash
+pip install streamlit folium streamlit-folium pandas numpy
 
-Nemli Ortam → Nem artar, sıcaklık azalır
+---
 
-Düşük Batarya → Batarya seviyesi hızlı düşer
+## ▶️ Uygulamayı Çalıştırma
 
-Senaryolar sensör verilerine yapay etki uygular.
-
-🖥️ Uygulamayı Çalıştırma
-1. Sanal ortam oluşturma
-python -m venv venv
-
-2. Sanal ortamı aktif etme
-
-Windows:
-
-venv\Scripts\activate
-
-
-Linux / Mac:
-
-source venv/bin/activate
-
-3. Gerekli kütüphaneleri kurma
-pip install -r requirements.txt
-
-4. Ortam değişkenlerini ayarlama
-
-.env dosyası oluştur:
-
-OPENWEATHER_API_KEY=API_KEYİNİZ
-
-5. Uygulamayı başlatma
 streamlit run app.py
 
+Uygulama varsayılan olarak şu adreste açılır:
 
-📊 Özellikler
+http://localhost:8501
 
-Harita üzerinde sensör düğümleri
+### 📁 Proje Yapısı
 
-Heatmap ile yoğunluk gösterimi
+├── app.py
+├── simulation.py
+├── weather.py
+├── data/
+│   └── sensor_log.csv
+└── README.md
 
-Seçilen node için zaman serisi grafikler
+### 📌 Notlar
 
-Senaryo bazlı karşılaştırma
-
-CSV olarak veri indirme
-
-📝 Notlar
-
-Bu proje eğitim ve simülasyon amaçlıdır.
-
-Gerçek donanım verisi içermez, veriler matematiksel modelle üretilir.
-
-OpenWeather API ücretsiz plan kullanıldığı için istek sınırı vardır.
-
-Sensör konumları İstanbul sınırları içinde rastgele üretilir.
-
-Batarya modeli ESP32 benzeri bir sistem varsayımıyla oluşturulmuştur.
+- Veriler data/sensor_log.csv dosyasına kaydedilir.
+- Senaryo algoritmaları genişletilebilir.
+- Gerçek hava API entegrasyonu eklenebilir.
+- Demo ve akademik kullanım için uygundur.
+- Dashboard yapısı geliştirilmeye açıktır.
